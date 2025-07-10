@@ -1,60 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import photo from './assets/짱구.png'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import photo from "./assets/짱구.png";
+import viteLogo from "/vite.svg";
+import TicTacToe from "./Square.jsx";
+import "./App.css";
 
 function MyButton() {
   function handleClick() {
-    alert('You clicked me!');
+    alert("You clicked me!");
   }
 
-  return (
-    <button onClick={handleClick}>
-      I'm a button
-    </button>
-  );
+  return <button onClick={handleClick}>I'm a button</button>;
 }
 
 function BoomButton() {
-  const [boom, setBoom] = useState(0)
-  
+  const [boom, setBoom] = useState(0);
+
   function handleClick() {
     setBoom(boom + 1);
   }
 
-  return (
-    <button onClick={handleClick}>
-      Boom! {boom} times
-    </button>
-  );
+  return <button onClick={handleClick}>Boom! {boom} times</button>;
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const user = {
-    name: 'zzz',
-    imageUrl : photo,
-    imageSize : 90,
+    name: "zzz",
+    imageUrl: photo,
+    imageSize: 90,
   };
 
   const products = [
-    { title: 'Cabbage', isFurit: false, id: 1 },
-    { title: 'Garlic', isFurit: false, id: 2 },
-    { title: 'Apple', isFurit: true, id: 3 },
-  ]
+    { title: "Cabbage", isFurit: false, id: 1 },
+    { title: "Garlic", isFurit: false, id: 2 },
+    { title: "Apple", isFurit: true, id: 3 },
+  ];
 
-  const listItems = products.map(product =>
-    <li 
+  const listItems = products.map((product) => (
+    <li
       key={product.id}
       style={{
-        color: product.isFurit ? 'magenta' : 'darkgreen'
-      }}  
+        color: product.isFurit ? "magenta" : "darkgreen",
+      }}
     >
       {product.title}
     </li>
-  );
+  ));
 
   return (
     <>
@@ -79,25 +72,27 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <hr/>
+      <hr />
       <h1>{user.name}</h1>
-      <img 
+      <img
         className="avatar"
         src={user.imageUrl}
-        alt={'Photo of ' + user.name}
+        alt={"Photo of " + user.name}
         style={{
           width: user.imageSize,
-          height: user.imageSize
+          height: user.imageSize,
         }}
       />
-      <hr/>
+      <hr />
       <ul>{listItems}</ul>
-      <hr/>
-      <MyButton/>
-      <hr/>
-      <BoomButton/>
+      <hr />
+      <MyButton />
+      <hr />
+      <BoomButton />
+      <hr />
+      <TicTacToe />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
