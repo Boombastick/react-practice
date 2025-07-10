@@ -1,10 +1,25 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import photo from './assets/짱구.png'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+function MyButton() {
+  return (
+    <button>
+      I'm a button
+    </button>
+  );
+}
+
 function App() {
   const [count, setCount] = useState(0)
+
+  const user = {
+    name: 'zzz',
+    imageUrl : photo,
+    imageSize : 90,
+  };
 
   return (
     <>
@@ -21,6 +36,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <MyButton />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
@@ -28,6 +44,17 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <hr/>
+      <h1>{user.name}</h1>
+      <img 
+        className="avatar"
+        src={user.imageUrl}
+        alt={'Photo of ' + user.name}
+        style={{
+          width: user.imageSize,
+          height: user.imageSize
+        }}
+      />
     </>
   )
 }
