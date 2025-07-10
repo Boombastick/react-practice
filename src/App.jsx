@@ -5,8 +5,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
   return (
-    <button>
+    <button onClick={handleClick}>
       I'm a button
     </button>
   );
@@ -74,6 +78,8 @@ function App() {
       />
       <hr/>
       <ul>{listItems}</ul>
+      <hr/>
+      <MyButton/>
     </>
   )
 }
