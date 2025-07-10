@@ -16,6 +16,20 @@ function MyButton() {
   );
 }
 
+function BoomButton() {
+  const [boom, setBoom] = useState(0)
+  
+  function handleClick() {
+    setBoom(boom + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Boom! {boom} times
+    </button>
+  );
+}
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -80,6 +94,8 @@ function App() {
       <ul>{listItems}</ul>
       <hr/>
       <MyButton/>
+      <hr/>
+      <BoomButton/>
     </>
   )
 }
