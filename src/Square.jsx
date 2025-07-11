@@ -9,10 +9,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-function Board() {
-  const [nextValue, setnextValue] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
+function Board({ squares, nextValue, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
 
@@ -37,8 +34,7 @@ function Board() {
       nextSquares[i] = "X";
     }
 
-    setSquares(nextSquares);
-    setnextValue(!nextValue);
+    onPlay(nextSquares);
   }
 
   function calculateWinner(squares) {
@@ -86,10 +82,48 @@ function Board() {
 }
 
 function TicTacToe() {
+  const [nextValue, setnextValue] = useState(true);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares = history[currentMove];
+
+  function handlePlay(nextSquares) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+    setnextValue(!nextValue);
+  }
+
+  function jumpTo(nextMove) {
+    setCurrentMove(nextMove);
+    setnextValue(nextMove % 2 === 0);
+  }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = "Go to move #" + move;
+    } else {
+      description = "Go to game start";
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
   return (
     <>
-      <Board />
-      {/* <h3>Next turn : {nextValue}</h3> */}
+      <div className="game-board">
+        <Board
+          squares={currentSquares}
+          nextValue={nextValue}
+          onPlay={handlePlay}
+        />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
+      </div>
     </>
   );
 }
